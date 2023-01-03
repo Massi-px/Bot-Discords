@@ -38,7 +38,8 @@ module.exports = {
             let intTime=Math.abs(ms(time));
 
             if(isNaN(intTime))return message.reply (`La durée n'est pas valide`);
-            else if(intTime >7.885e+9)return message.reply(`La durée ne peut pas dépasser 3 mois, veuillez utliser la commande \`/ban\` `);
+            else if(intTime >7.885e+9)return message.reply(`La durée ne peut pas dépasser 3 mois, veuillez utliser la commande \`/ban\``);
+            else if(intTime < 2.592e+8)return message.reply(`La durée ne peut pas être inférieur à 3 jours`);
 
             if(await Ban.run(bot,message,args,false)===0){
                 let user = args.getUser("membre");
