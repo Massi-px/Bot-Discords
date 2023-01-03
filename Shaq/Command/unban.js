@@ -15,7 +15,7 @@ module.exports = {
 
     ],
 
-    async run(bot, message, args) {
+    async run(bot, message, args,etat=true) {
 
         try {
             let user = args.getUser("membre");
@@ -26,7 +26,7 @@ module.exports = {
 
             try {await user.send(`Tu as été unban de ${message.guild.name} par ${message.user.tag}`)} catch(err){console.log(err)}
 
-            await message.reply(`${message.user} a unban ${user.tag}.`)
+            if(etat===true)await message.reply(`${message.user} a unban ${user.tag}.`)
 
             await message.guild.members.unban(user,null);
         }

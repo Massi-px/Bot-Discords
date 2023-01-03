@@ -20,10 +20,10 @@ module.exports = {
     }
   ],
 
-  async run(bot, message, args) {
+  async run(bot, message, args,etat=true) {
 
     try {
-        let user = await bot.users.fetch(args._hoistedOptions[0].value)
+        let user = args.getUser("membre");
         if(!user) return message.reply("Pas de membre à bannir")
         let member = message.guild.members.cache.get(user.id)
 
@@ -40,9 +40,10 @@ module.exports = {
 
         try {await user.send(`Tu as été banni du serveur ${message.guild.name} par ${message.user.tag} pour la raison : \`${reason}\``)} catch(err) {}
 
-        await message.reply (`${message.user} a banni ${user.tag} pour la raison : \`${reason}\``)
+        if(etat===true)await message.reply (`${message.user} a banni ${user.tag} pour la raison : \`${reason}\``)
 
         await message.guild.bans.create(user.id, {reason: reason})
+        return 0;
     }
 
     catch(err)
