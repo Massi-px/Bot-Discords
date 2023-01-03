@@ -40,7 +40,7 @@ module.exports = {
             if(isNaN(intTime))return message.reply (`La durée n'est pas valide`);
             else if(intTime >7.885e+9)return message.reply(`La durée ne peut pas dépasser 3 mois, veuillez utliser la commande \`/ban\` `);
 
-            if(await Ban.run(bot,message,args,false)==0){
+            if(await Ban.run(bot,message,args,false)===0){
                 let user = args.getUser("membre");
                 let reason = args.getString("raison");
                 if(!reason) reason = "Aucune raison fourni";
@@ -48,10 +48,10 @@ module.exports = {
 
                 await message.reply(`${message.user} a banni temporairement ${user.tag} pendant ${time} pour la raison : \`${reason}\``);
 
-                try {await user.send(`durée : ${time}`)} catch(err){console.log(err)};
+                try {await user.send(`durée : ${time}`)} catch(err){console.log(err)}
 
                 setTimeout(async function() {
-                    if((await message.guild.bans.fetch()).get(user.id)) Unban.run(bot,message,args,false);
+                    if((await message.guild.bans.fetch()).get(user.id)) await Unban.run(bot, message, args, false);
                 }, intTime);
             }
         }
