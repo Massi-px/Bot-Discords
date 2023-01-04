@@ -22,6 +22,3 @@ bot.login(config.token);
 //Fonction qui permet de savoir si le bot à éffectué la commande avec succès !
 loadCommands(bot);
 loadEvents(bot);
-
-
-//----------------------------------------Commande bot discord--------------------
